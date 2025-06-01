@@ -1,0 +1,69 @@
+{
+  "name": "python-code-reviewer",
+  "displayName": "Agents: Code Review",
+  "description": "AI-powered code review for Python code",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:python-code-reviewer.reviewCode"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "python-code-reviewer.reviewCode",
+        "title": "AI: Review Python Code"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "resourceLangId == python",
+          "command": "python-code-reviewer.reviewCode",
+          "group": "Python Code Reviewer"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Python Code Reviewer",
+      "properties": {
+        "pythonCodeReviewer.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for the OpenAI service"
+        },
+        "pythonCodeReviewer.baseUrl": {
+          "type": "string",
+          "default": "https://api.openai.com/v1",
+          "description": "Base URL for the OpenAI service"
+        },
+        "pythonCodeReviewer.model": {
+          "type": "string",
+          "default": "gpt-4",
+          "description": "Model to use for code review"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "echo Compiled successfully!",
+    "lint": "eslint .",
+    "pretest": "npm run compile && npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.60.0",
+    "eslint": "^8.0.0"
+  },
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
+}
